@@ -1,7 +1,7 @@
 ---
 - name: Install dependency package before installing Sury's repo
   ansible.builtin.apt:
-    ansible.builtin.pkg:
+    pkg:
       - gpg
       - apt-transport-https
       - lsb-release
