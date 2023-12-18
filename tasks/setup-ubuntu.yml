@@ -1,0 +1,13 @@
+---
+- name: Install dependency package before installing Sury's repo
+  ansible.builtin.apt:
+    ansible.builtin.pkg:
+      - gpg
+      - apt-transport-https
+      - lsb-release
+      - ca-certificates
+    state: present
+    update_cache: yes
+
+- name: Add Sury's APT repository
+  ansible.builtin.apt_repository: repo=ppa:ondrej/php state=present update_cache=yes

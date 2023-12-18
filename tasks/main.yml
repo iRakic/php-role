@@ -1,0 +1,8 @@
+---
+- ansible.builtin.include_tasks: variables.yml
+
+- ansible.builtin.include_tasks: setup-debian.yml
+  when: ansible_distribution == 'Debian'
+
+- ansible.builtin.include_tasks: setup-ubuntu.yml
+  when: ansible_distribution == 'Ubuntu'
