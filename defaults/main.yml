@@ -1,6 +1,6 @@
 php_install_versions: [8.2]
 php_extensions:
-  - 7.4:
+  7.4:
     - cli
     - fpm
     - intl
@@ -21,7 +21,7 @@ php_extensions:
     - sqlite3
     - xml
     - zip
-  - 8.2:
+  8.2:
     - cli
     - fpm
     - intl
