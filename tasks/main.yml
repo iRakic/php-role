@@ -6,3 +6,6 @@
 
 - ansible.builtin.include_tasks: setup-ubuntu.yml
   when: ansible_distribution == 'Ubuntu'
+
+- ansible.builtin.include_tasks: install-composer.yml
+  when: php_install_composer|bool
