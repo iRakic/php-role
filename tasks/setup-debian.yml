@@ -17,4 +17,10 @@
 - name: Add Sury's APT repository
   ansible.builtin.apt_repository: 
     repo: "deb https://packages.sury.org/php/ {{ ansible_distribution_release }} main"
-    state: present    
+    state: present
+
+- name: Install extensions for each selected PHP version
+  include_tasks: debian-install-php-extensions.yml
+  loop: "{{ php_install_versions }}"
+  loop_control:
+    loop_var: php_version
