@@ -1,5 +1,5 @@
 php_install_versions: [8.2]
-php_extension:
+php_extensions:
   - 7.4:
     - cli
     - fpm
