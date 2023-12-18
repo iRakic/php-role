@@ -25,7 +25,6 @@ php_extensions:
     - cli
     - fpm
     - intl
-    - json
     - mcrypt
     - bz2
     - curl
