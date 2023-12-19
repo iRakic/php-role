@@ -42,3 +42,13 @@ php_extensions:
     - sqlite3
     - xml
     - zip
+
+php_pools: []
+#php_pools:
+#  - name: user1 
+#    version: 8.2 
+#    listen_owner: # [optional] default to name variable
+#    listen_group: # [optional] default to OS's specific group ex: www-data
+#    user: # [optional] default to name variable
+#    group: # [optional] default to name variable
+#    socket: # [optional] will generate it based on OS's variable template

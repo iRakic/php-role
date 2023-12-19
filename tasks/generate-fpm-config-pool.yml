@@ -1,0 +1,42 @@
+---
+- name: Setting PHP FPM pool dir for pool {{ php_pool.name }}
+  set_fact:
+    php_fpm_conf_path: "{{ php_fpm_conf_path | replace('__PHP_VERSION__', php_pool.version) }}"
+
+- name: Setting PHP FPM listen owner for pool {{ php_pool.name }}
+  set_fact:
+    php_listen_owner: "{{ php_pool.name }}"
+  when: php_pool.listen_owner is not defined
+
+- name: Setting PHP FPM listen group for pool {{ php_pool.name }}
+  set_fact:
+    php_listen_group: "{{ php_pool.name }}"
+  when: php_pool.listen_group is not defined
+
+- name: Setting PHP FPM socket for pool {{ php_pool.name }}
+  set_fact:
+    php_pool_socket: "{{ __php_fpm_socket | replace('__NAME__', php_pool.name) }}"
+  when: php_pool.socket is not defined
+
+- name: Setting PHP FPM user for pool {{ php_pool.name }}
+  set_fact:
+    php_pool_user: "{{ php_pool.name }}"
+  when: php_pool.user is not defined
+
+- name: Setting PHP FPM group for pool {{ php_pool.name }}
+  set_fact:
+    php_pool_group: "{{ php_pool.name }}"
+  when: php_pool.group is not defined
+
+- name: Registering PHP pool socket for {{ php_pool.name }}
+  set_fact:
+    php_{{ php_pool.name }}_socket: "{{ php_pool_socket }}"
+
+- name: Create FPM pool for pool {{ php_pool.name }}
+  template:
+    src: "{{ item.pool_template | default('fpm-user-conf.j2', true) }}"
+    dest: "{{ php_fpm_conf_path }}/{{ php_pool.name }}.conf"
+    owner: root
+    group: root
+    mode: 0644
+    force: true

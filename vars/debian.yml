@@ -1,0 +1,6 @@
+__php_version: 7.2
+__php_fpm_pool_user: www-data
+__php_fpm_pool_group: www-data
+
+__php_fpm_socket: /var/run/__NAME__.socket
+__php_fpm_conf_path: /etc/php/__PHP_VERSION__/fpm/pool.d

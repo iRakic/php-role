@@ -1,0 +1,21 @@
+{{ ansible_managed | comment(decoration='; ') }}
+
+[{{ php_pool.name }}]
+listen = {{ php_pool_socket }}
+listen.owner = {{ php_listen_owner }}
+listen.group = {{ php_listen_group }}
+listen.mode = 0664
+
+user = {{ php_pool_user }}
+group = {{ php_pool_group }}
+pm = ondemand
+pm.max_children = 700
+pm.start_servers = 10
+pm.min_spare_servers = 10
+pm.max_spare_servers = 30
+pm.max_requests = 5000
+pm.process_idle_timeout = 300s
+pm.status_path = /status
+request_terminate_timeout = 300
+rlimit_files = 65536
+rlimit_core = unlimited

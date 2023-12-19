@@ -1,0 +1,18 @@
+---
+- name: Include OS specific variables
+  ansible.builtin.include_vars: "{{ item }}"
+  with_first_found:
+    - files:
+        - "vars/{{ ansible_os_family | lower }}-{{ ansible_distribution_major_version }}.yml"
+        - "vars/{{ ansible_os_family | lower }}.yml"
+      skip: true
+
+- name: Define php_fpm_conf_path
+  ansible.builtin.set_fact:
+    php_fpm_conf_path: "{{ __php_fpm_conf_path }}"
+  when: php_fpm_conf_path is not defined
+
+- name: Define php_fpm_pool_user
+  ansible.builtin.set_fact:
+    php_fpm_pool_user: "{{ __php_fpm_pool_user }}"
+  when: php_fpm_pool_user is not defined
