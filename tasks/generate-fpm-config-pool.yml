@@ -28,9 +28,14 @@
     php_pool_group: "{{ php_pool.name }}"
   when: php_pool.group is not defined
 
+# This is intended to be used outside the role
 - name: Registering PHP pool socket for {{ php_pool.name }}
   set_fact:
     php_{{ php_pool.name }}_socket: "{{ php_pool_socket }}"
+
+- name: Registering PHP FPM daemon used for {{ php_pool.name }}
+  set_fact:
+    php_fpm_daemon: "{{ __php_fpm_daemon | replace('__PHP_VERSION__', php_pool.version) }}"
 
 - name: Create FPM pool for pool {{ php_pool.name }}
   template:
