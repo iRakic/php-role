@@ -10,7 +10,7 @@
 
 - name: Setting PHP FPM listen group for pool {{ php_pool.name }}
   set_fact:
-    php_listen_group: "{{ php_pool.name }}"
+    php_listen_group: "{{ __php_listen_group }}"
   when: php_pool.listen_group is not defined
 
 - name: Setting PHP FPM socket for pool {{ php_pool.name }}
