@@ -19,3 +19,6 @@ pm.status_path = /status
 request_terminate_timeout = 300
 rlimit_files = 65536
 rlimit_core = unlimited
+
+php_admin_value[upload_max_filesize] = {{ php_pool.upload_max_filesize | default('128M') }}
+php_admin_value[post_max_size]       = { php_pool.post_max_size | default('128M') }}
