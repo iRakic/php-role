@@ -1,0 +1,5 @@
+- name: Installing PHP extension
+  ansible.builtin.apt:
+    pkg: php{{ php_version }}-{{ item }}
+    state: present
+  loop: "{{ php_extensions[php_version] }} "

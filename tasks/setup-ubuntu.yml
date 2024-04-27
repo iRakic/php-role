@@ -14,3 +14,9 @@
     repo: 'ppa:ondrej/php'
     state: present
     update_cache: yes
+
+- name: Install extensions for each selected PHP version
+  include_tasks: ubuntu-install-php-extensions.yml
+  loop: "{{ php_install_versions }}"
+  loop_control:
+    loop_var: php_version
