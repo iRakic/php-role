@@ -9,5 +9,8 @@
     state: present
     update_cache: yes
 
-- name: Add Sury's APT repository
-  ansible.builtin.apt_repository: repo=ppa:ondrej/php state=present update_cache=yes
+- name: Add Sury's APT repository for PHP
+  ansible.builtin.apt_repository:
+    repo: 'ppa:ondrej/php'
+    state: present
+    update_cache: yes
