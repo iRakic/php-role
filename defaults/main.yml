@@ -18,7 +18,8 @@ php_extensions:
     - mysqlnd
     - sqlite3
     - xml
-    - zip    
+    - zip
+    - xml    
   7.4:
     - cli
     - fpm
