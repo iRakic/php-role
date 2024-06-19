@@ -52,7 +52,7 @@
 - name: Create FPM pool for pool {{ php_pool.name }}
   template:
     src: "{{ item.pool_template | default('fpm-user-conf.j2', true) }}"
-    dest: "{{ php_fpm_conf_path }}/{{ php_pool.name }}.conf"
+    dest: "{{ php_fpm_conf_path | replace('__PHP_VERSION__', php_pool.version) }}/{{ php_pool.name }}.conf"
     owner: root
     group: root
     mode: 0644
