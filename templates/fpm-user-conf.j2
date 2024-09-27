@@ -22,3 +22,5 @@ rlimit_core = unlimited
 
 php_admin_value[upload_max_filesize] = {{ php_pool.upload_max_filesize | default('128M') }}
 php_admin_value[post_max_size]       = {{ php_pool.post_max_size | default('128M') }}
+php_admin_value[memory_limit]        = {{ php_pool.memory_limit | default('128M') }}
+php_admin_value[max_execution_time]  = {{ php_pool.max_execution_time | default('30') }}
