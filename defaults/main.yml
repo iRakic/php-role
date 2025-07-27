@@ -1,4 +1,4 @@
-php_install_versions: [8.2]
+php_install_versions: [8.4]
 php_install_composer: false
 php_extensions:
   5.6:
