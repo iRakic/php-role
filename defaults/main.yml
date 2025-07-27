@@ -1,4 +1,4 @@
-php_install_versions: [8.2]
+php_install_versions: [8.4]
 php_install_composer: false
 php_extensions:
   5.6:
@@ -58,6 +58,42 @@ php_extensions:
     - mysql
     - mysqli
     - mysqlnd
+    - sqlite3
+    - xml
+    - zip
+  8.3:
+    - cli
+    - fpm
+    - intl
+    - bz2
+    - curl
+    - dom
+    - gd
+    - igbinary
+    - mbstring
+    - memcache
+    - memcached
+    - msgpack
+    - mysql
+    - mysqli
+    - sqlite3
+    - xml
+    - zip
+  8.4:
+    - cli
+    - fpm
+    - intl
+    - bz2
+    - curl
+    - dom
+    - gd
+    - igbinary
+    - mbstring
+    - memcache
+    - memcached
+    - msgpack
+    - mysql
+    - mysqli
     - sqlite3
     - xml
     - zip
