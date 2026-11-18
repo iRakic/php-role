@@ -1,0 +1,19 @@
+---
+- name: Configure php.ini settings
+  community.general.ini_file:
+    path: /etc/php/{{ item.version }}/{{ item.sapi }}/php.ini
+    section: PHP
+    option: "{{ item.option }}"
+    value: "{{ item.value }}"
+    mode: 0644
+  loop: "{{ php_ini_settings }}"
+  loop_control:
+    label: "{{ item.version }}/{{ item.sapi }}: {{ item.option }} = {{ item.value }}"
+  register: php_ini_result
+
+- name: Restart PHP-FPM after php.ini changes
+  ansible.builtin.service:
+    name: php{{ item }}-fpm
+    state: restarted
+  loop: "{{ php_ini_result.results | selectattr('changed') | selectattr('item.sapi', 'equalto', 'fpm')
+            | map(attribute='item.version') | map('string') | unique | list }}"
