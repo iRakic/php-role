@@ -111,3 +111,12 @@ php_pools: []
 #    upload_max_filesize: 1024M
 #    memory_limit: 256M
 #    max_execution_time: 60
+
+#php_ini_settings:
+#  - { version: 5.6, sapi: fpm, option: short_open_tag, value: "On" }
+#  - { version: 8.2, sapi: cli, option: memory_limit, value: "-1" }
+php_ini_settings: []
+
+php_ubuntu_repo: "{{ 'sury' if ansible_distribution_version is version('26.04', '>=') else 'ppa' }}"
+php_sury_key_url: https://packages.sury.org/php/apt.gpg
+php_sury_keyring: /usr/share/keyrings/deb.sury.org-php.gpg

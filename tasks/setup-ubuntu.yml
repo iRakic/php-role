@@ -9,11 +9,38 @@
     state: present
     update_cache: yes
 
-- name: Add Sury's APT repository for PHP
+- name: Add Sury's APT repository for PHP (Launchpad PPA)
   ansible.builtin.apt_repository:
     repo: 'ppa:ondrej/php'
     state: present
     update_cache: yes
+  when: php_ubuntu_repo == 'ppa'
+
+- name: Add Sury's APT repository for PHP (packages.sury.org)
+  when: php_ubuntu_repo == 'sury'
+  block:
+    - name: Download Sury's signing key
+      ansible.builtin.get_url:
+        url: "{{ php_sury_key_url }}"
+        dest: "{{ php_sury_keyring }}"
+        mode: "0644"
+
+    - name: Add packages.sury.org/php source
+      ansible.builtin.copy:
+        dest: /etc/apt/sources.list.d/sury-php.sources
+        mode: "0644"
+        content: |
+          Types: deb
+          URIs: https://packages.sury.org/php/
+          Suites: {{ ansible_distribution_release }}
+          Components: main
+          Signed-By: {{ php_sury_keyring }}
+      register: php_sury_source
+
+    - name: Update apt cache
+      ansible.builtin.apt:
+        update_cache: true
+      when: php_sury_source.changed
 
 - name: Install extensions for each selected PHP version
   include_tasks: ubuntu-install-php-extensions.yml
